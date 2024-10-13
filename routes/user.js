@@ -60,4 +60,14 @@ router.post('/login',(request,response)=>{
   })
 
 })
+
+
+
+
+router.get('/profile/',(request,response) =>{
+  const statement =`select firstName,lastName,phoneNumber,email from user where id = ?;`
+  db.pool.execute(statement,[request.userId],(error,result)=>{
+    response.send(utils.createResult(error,result))
+  })
+})
 module.exports = router;

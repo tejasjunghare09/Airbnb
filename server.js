@@ -21,7 +21,32 @@ app.use((request, response, next) => {
   ) {
     next();
   } else {
-    console.log();
+    //get the token
+    const authtoken= request.headers.authorization;
+    const token = authtoken.split(" ")[1];
+    console.log("$ ",token);
+    // const token =request.headers['token']
+
+    if(!token || token.length ===0){
+      response.send(utils.createErrorResult('missing token'))
+    } else{
+      try{
+        //verify the token
+        const payload=jwt.verify(token,config.secret)
+
+        //add the user Id to the request
+        request.userId=payload['id']
+
+        //TODO: expiry logic
+
+        // call the real route
+
+        next()
+      }
+      catch (ex){
+        response.send(utils.createErrorResult('invalid token'))
+      }
+    }
   }
 });
 
