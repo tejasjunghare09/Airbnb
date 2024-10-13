@@ -51,7 +51,17 @@ app.use((request, response, next) => {
 });
 
 const userRouter = require("./routes/user");
+const categoryRouter = require ("./routes/category")
+const imageRouter =require ("./routes/image")
+const propertyRouter = require('./routes/property')
+const bookingRouter = require('./routes/booking')
+
 app.use("/user", userRouter);
+app.use('/category',categoryRouter)
+app.use('/image', imageRouter)
+app.use('/property',propertyRouter)
+app.use('/booking',bookingRouter)
+
 app.listen(4000, "0.0.0.0", () => {
   console.log("Server is running on port 4000");
 });
