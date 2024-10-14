@@ -131,13 +131,3 @@ dist
 
 
 
-# Ignore environment variable files
-.env
-.env.local
-
-# Ignore API keys or other secret files
-config/secrets.yml
-secret-keys.json
-
-# Ignore node_modules directory
-node_modules/
